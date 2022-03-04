@@ -10,3 +10,7 @@ def home(request):
 
 def register(request):
     return render(request, 'signup.html')
+
+def loginuser(request):
+
+	return render(request, 'index.html')
