@@ -1,471 +1,60 @@
+{% load static %}
+{% static "images" as baseUrl %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!--
-      Site created by Brian Design on youtube @ www.youtube.com/channel/UCsKsymTY_4BYR-wytLjex7A?view_as=subscriber
-    -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Awesome Bot App</title>
-    <link rel="stylesheet" href="style.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
+    <title>PyGithub Bots</title>
+
+    <link rel="stylesheet" href="assets/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <style type="text/css">
-    	* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family:sans-serif;
-  }
-  
-  .navbar {
-    background: #131313;
-    height: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.2rem;
-    position: sticky;
-    top: 0;
-    z-index: 999;
-  }
-  
-  .navbar__container {
-    display: flex;
-    justify-content: space-between;
-    height: 80px;
-    z-index: 1;
-    width: 100%;
-    max-width: 1300px;
-    margin-right: auto;
-    margin-left: auto;
-    padding-right: 50px;
-    padding-left: 50px;
-  }
-  
-  #navbar__logo {
-    background-color: #dedbeb;
-    background-image: linear-gradient(to top, #100244 0%, #8d80d8 100%);
-    background-size: 100%;
-    -webkit-background-clip: text;
-    -moz-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -moz-text-fill-color: transparent;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    text-decoration: none;
-    font-size: 2rem;
-  }
-  
-  .fa-gem {
-    margin-right: 0.5rem;
-  }
-  
-  .navbar__menu {
-    display: flex;
-    align-items: center;
-    list-style: none;
-    text-align: center;
-  }
-  
-  .navbar__item {
-    height: 80px;
-  }
-  
-  .navbar__links {
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    padding: 0 1rem;
-    height: 100%;
-  }
-  
-  .navbar__btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 1rem;
-    width: 100%;
-  }
-  
-  .button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    padding: 10px 20px;
-    height: 100%;
-    width: 100%;
-    border: none;
-    outline: none;
-    border-radius: 4px;
-    background: #270e55;
-    color: #fff;
-  }
-  
-  .button:hover {
-    background: #aca6eb;
-    transition: all 0.3s ease;
-  }
-  
-  .navbar__links:hover {
-    color: #8350c7;
-    transition: all 0.3s ease;
-  }
-  
-  @media screen and (max-width: 960px) {
-    .navbar__container {
-      display: flex;
-      justify-content: space-between;
-      height: 80px;
-      z-index: 1;
-      width: 100%;
-      max-width: 1300px;
-      padding: 0;
-    }
-  
-    .navbar__menu {
-      display: grid;
-      grid-template-columns: auto;
-      margin: 0;
-      width: 100%;
-      position: absolute;
-      top: -1000px;
-      opacity: 1;
-      transition: all 0.5s ease;
-      height: 50vh;
-      z-index: -1;
-    }
-  
-    .navbar__menu.active {
-      background: #131313;
-      top: 100%;
-      opacity: 1;
-      transition: all 0.5s ease;
-      z-index: 99;
-      height: 50vh;
-      font-size: 1.6rem;
-    }
-  
-    #navbar__logo {
-      padding-left: 25px;
-    }
-  
-    .navbar__toggle .bar {
-      width: 25px;
-      height: 3px;
-      margin: 5px auto;
-      transition: all 0.3s ease-in-out;
-      background: #fff;
-    }
-  
-    .navbar__item {
-      width: 100%;
-    }
-  
-    .navbar__links {
-      text-align: center;
-      padding: 2rem;
-      width: 100%;
-      display: table;
-    }
-  
-    .navbar__btn {
-      padding-bottom: 2rem;
-    }
-  
-    .button {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 80%;
-      height: 80px;
-      margin: 0;
-    }
-  
-    #mobile-menu {
-      position: absolute;
-      top: 20%;
-      right: 5%;
-      transform: translate(5%, 20%);
-    }
-  
-    .navbar__toggle .bar {
-      display: block;
-      cursor: pointer;
-    }
-  
-    #mobile-menu.is-active .bar:nth-child(2) {
-      opacity: 0;
-    }
-  
-    #mobile-menu.is-active .bar:nth-child(1) {
-      transform: translateY(8px) rotate(45deg);
-    }
-  
-    #mobile-menu.is-active .bar:nth-child(3) {
-      transform: translateY(-8px) rotate(-45deg);
-    }
-  }
-  
-  /* Main Content CSS */
-  .main {
-    background-color: #141414;
-  }
-  
-  .main__container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    justify-self: center;
-    margin: 0 auto;
-    height: 90vh;
-    background-color: #131313;
-    z-index: 1;
-    width: 100%;
-    max-width: 1300px;
-    padding-right: 50px;
-    padding-left: 50px;
-  }
-  
-  .main__content {
-    color: #fff;
-    width: 100%;
-  }
-  
-  .main__content h1 {
-    font-size: 4rem;
-    background-color: #ff8177;
-    background-image: linear-gradient(to top, #ff0844 0%, #ffb199 100%);
-    background-size: 100%;
-    -webkit-background-clip: text;
-    -moz-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -moz-text-fill-color: transparent;
-  }
-  
-  .main__content h2 {
-    font-size: 4rem;
-    margin-top: 10px;
-    background-color: #ff8177;
-    background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
-    background-size: 100%;
-    -webkit-background-clip: text;
-    -moz-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -moz-text-fill-color: transparent;
-  }
-  
-  .main__content p {
-    margin-top: 1rem;
-    font-size: 2rem;
-    font-weight: 700;
-  }
-  
-  .main__btn {
-    font-size: 1rem;
-    background-image: linear-gradient(to top, #f77062 0%, #fe5196 100%);
-    padding: 14px 32px;
-    border: none;
-    border-radius: 4px;
-    color: #fff;
-    margin-top: 2rem;
-    cursor: pointer;
-    position: relative;
-    transition: all 0.35s;
-    outline: none;
-  }
-  
-  .main__btn a {
-    position: relative;
-    z-index: 2;
-    color: #fff;
-    text-decoration: none;
-  }
-  
-  .main__btn:after {
-    position: absolute;
-    content: '';
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 100%;
-    background: #4837ff;
-    transition: all 0.35s;
-    border-radius: 4px;
-  }
-  
-  .main__btn:hover {
-    color: #fff;
-  }
-  
-  .main__btn:hover:after {
-    width: 100%;
-  }
-  
-  .main__img--container {
-    text-align: center;
-  }
-  
-  #main__img {
-    height: 80%;
-    width: 80%;
-  }
-  
-  /* Mobile Responsive */
-  @media screen and (max-width: 768px) {
-    .main__container {
-      display: grid;
-      grid-template-columns: auto;
-      align-items: center;
-      justify-self: center;
-      width: 100%;
-      margin: 0 auto;
-      height: 90vh;
-    }
-  
-    .main__content {
-      text-align: center;
-      margin-bottom: 4rem;
-    }
-  
-    .main__content h1 {
-      font-size: 2.5rem;
-      margin-top: 2rem;
-    }
-  
-    .main__content h2 {
-      font-size: 3rem;
-    }
-  
-    .main__content p {
-      margin-top: 1rem;
-      font-size: 1.5rem;
-    }
-  }
-  
-  @media screen and (max-width: 480px) {
-    .main__content h1 {
-      font-size: 2rem;
-      margin-top: 3rem;
-    }
-  
-    .main__content h2 {
-      font-size: 2rem;
-    }
-  
-    .main__content p {
-      margin-top: 2rem;
-      font-size: 1.5rem;
-    }
-  
-    .main__btn {
-      padding: 12px 36px;
-      margin: 2.5rem 0;
-    }
-  }
-  .feat{
-    background-color: #141414;
-    text-align: center;
-  }
-  .feat1{
-    font-size: 4rem;
-    background-color: #ff8177;
-    background-image: linear-gradient(to top, #ff0844 0%, #ffb199 100%);
-    background-size: 100%;
-    -webkit-background-clip: text;
-    -moz-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -moz-text-fill-color: transparent;
-  }
-  .feat2{
-    font-size: 2.5rem;
-    margin-top: 10px;
-    background-color: #ff8177;
-    background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
-    background-size: 100%;
-    -webkit-background-clip: text;
-    -moz-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -moz-text-fill-color: transparent;
-  }
-  .list{
-    position: relative;
-    font-size: 1.5rem;
-    margin: 5px 5px;
-    padding-top: 10px;
-    padding-bottom: 50px;
-    text-align: center;
-  }
- .footer__container {
-    background-color: #141414;
-    padding: 5rem 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-decoration-color: #21d4fd;
-  }
 
     </style>
   </head>
   <body>
-    <!-- Navbar Section -->
-    <nav class="navbar">
-      <div class="navbar__container">
-        <a href="index.html" id="navbar__logo">Awesome Bot App<i class="fa-thin fa-robot"></i></a>
-        <div class="navbar__toggle" id="mobile-menu">
-          <span class="bar"></span> <span class="bar"></span>
-          <span class="bar"></span>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+              </li>
+            </ul>
+            <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
         </div>
-        <ul class="navbar__menu">
-          <li class="navbar__btn"><a href="login" class="button">Log In</a></li>
-          <li class="navbar__btn"><a href="create" class="button">SignUp</a></li>
-        </ul>
-      </div>
-    </nav>
-    <div class="main">
-      <div class="main__container">
-        <div class="main__content">
-          <h1>A Github Bot App</h1>
-          <h2>For automating work flow</h2>
-          <p>Check the github Repository.</p>
-          <button class="main__btn"><a href="https://github.com/vasu-1/GitHub-Bot">Repository</a></button>
-        </div>
-        <div class="main__img--container">
-          <img id="main__img" src="https://user-images.githubusercontent.com/76911582/154839659-13d52d55-23f4-4f38-8e43-c9332bb35df7.jpg" />
-        </div>
-      </div>
-    </div>
-
-   <div class="feat">
-      <h1 class="feat1">Features</h1><br>
-      <div class="list">
-      <h10 class="feat2">Install with ease</h10><br>
-      <h10 class="feat2">Greets the user who creates an isuue</h10><br>
-      <h10 class="feat2">Automatically assigns the issue</h10><br>
-      <h10 class="feat2">Labels the issues that needs to be reviewed</h10><br>
-      <h10 class="feat2">Displays workflow status</h10><br>
-      <h10 class="feat2">Greets the user who creates a pull request</h10><br>
-      <h10 class="feat2">Reviews the pull request and adds a label</h10><br>
-    </div>
-      <img src="https://user-images.githubusercontent.com/76911582/154840343-7de957ec-26b9-4cf0-a380-40785e2ad973.jpg" width="1000px" height="500px"/>
+      </nav>
 
 
-      </div>
-    </div>
-
-    <!-- Footer Section -->
-    <div class="footer__container">
-       <p style="color: #ffff ">© Awesome Bot App</p>
-    </div>
-      </section>
-    </div>
-    <script src="app.js"></script>
+    <script src="assets/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   </body>
 </html>
