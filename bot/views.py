@@ -7,3 +7,6 @@ from django import *
 def home(request):
 	# return HttpResponse("<h1>Hello World</h1>");
 	return render(request,'index.html')
+
+def register(request):
+    return render(request, 'signup.html')
