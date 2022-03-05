@@ -2,11 +2,6 @@
 {% block content %}
 {% load static %}
 {% comment %} {% static "images" as baseUrl %} {% endcomment %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">   
 <style>
 body {
 	background: #63738a;
@@ -95,8 +90,6 @@ body {
 	text-decoration: underline;
 }  
 </style>
-</head>
-<body>
 
 <div class="signup-form">
     <form action="registeruser/" method="post">
@@ -136,7 +129,4 @@ body {
     </form>
 	<div class="text-center">Already have an account? <a class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#loginModal" style="text-decoration: none;">Sign in</a></div>
 </div>
-
-</body>
-</html>
 {%endblock%}
