@@ -52,7 +52,7 @@ def registeruser(request):
                 user1.save()
                 print("User Registered")
         else:
-            messages.info(request,"Password is not matching")
+            messages.info(request,"Both Password is not matching")
             return redirect('register')
 
         return redirect('/')
