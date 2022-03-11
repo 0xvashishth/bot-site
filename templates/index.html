@@ -47,6 +47,25 @@
    {
     document.getElementById("user").innerHTML = "{{user1.username}}"
     document.getElementById("user").href = "/userprofile"
+    document.getElementById("loginid").outerHTML = ""
+
+    //create a new term
+    const terms = document.createElement('a');
+
+    //set id
+    terms.setAttribute("id","logout");
+    terms.setAttribute("class","btn btn-outline-light");
+    terms.setAttribute("href","/logoutuser");
+    //add the new element to html
+    var body = document.querySelector('.removeelementlogin')
+    body.appendChild(terms)
+    document.getElementById("logout").innerHTML="Logout";
+
+    
+
+
+
+
    }
 
       
