@@ -79,5 +79,8 @@ def loginuser(request):
         return redirect("register")    
     
 
-def userprofile(request):
-    return render(request, "userprofile.html")    
+def userprofile(request, username):
+    data = {}
+    data["userdata"] = user.objects.get(username = username)
+    
+    return render(request, "userprofile.html", data)    

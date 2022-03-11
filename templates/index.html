@@ -46,7 +46,7 @@
    if("{{user1.username}}" != "") 
    {
     document.getElementById("user").innerHTML = "{{user1.username}}"
-    document.getElementById("user").href = "/userprofile"
+    document.getElementById("user").href = "/userprofile/{{user1.username}}"
     document.getElementById("loginid").outerHTML = ""
 
     //create a new term
@@ -60,12 +60,6 @@
     var body = document.querySelector('.removeelementlogin')
     body.appendChild(terms)
     document.getElementById("logout").innerHTML="Logout";
-
-    
-
-
-
-
    }
 
       
