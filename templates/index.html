@@ -5,6 +5,16 @@
 
     
     <h1>Hello World</h1>
+    <h1>{{user1.username}}</h1>
 
+
+<script>
+
+   if({{user1.username}}) 
+   {
+    document.getElementById("user").innerHTML = "{{user1.username}}"   
+   }
+     
+</script>    
     
 {% endblock %}

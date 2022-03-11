@@ -68,7 +68,9 @@ def loginuser(request):
         
         if(user.objects.filter(username=username).exists()):
             if(user.objects.filter(password=password).exists()):
-                return render(request, 'index.html')
+                context = {}
+                context["user1"] = user.objects.get(username = username)
+                return render(request, 'index.html', context)
             else:
                 return redirect("register")
         else:
