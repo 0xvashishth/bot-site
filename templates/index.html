@@ -36,6 +36,18 @@
             </ul>
         </center>
   <div>
+    
+    {% comment %} <h1>{{user1.username}}</h1> {% endcomment %}
 
+
+
+<script>
+
+   if({{user1.username}}) 
+   {
+    document.getElementById("user").innerHTML = "{{user1.username}}"   
+   }
+     
+</script>    
     
 {% endblock %}
