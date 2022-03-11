@@ -61,8 +61,17 @@ def registeruser(request):
         return render(request,'signup.html')
 
 def loginuser(request):
-     if(request.method == "POST"):
+    if(request.method == "POST"):
         username = request.POST["username"]
-        username = request.POST["password"]
+        password = request.POST["password"]
         
-        return render(request, 'index.html')
+        
+        if(user.objects.filter(username=username).exists()):
+            if(user.objects.filter(password=password).exists()):
+                return render(request, 'index.html')
+            else:
+                return redirect("register")
+        else:
+            return redirect("register")    
+    else:
+        return redirect("register")    
