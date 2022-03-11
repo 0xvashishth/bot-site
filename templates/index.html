@@ -43,7 +43,7 @@
 
 <script>
 
-   if({{user1.username}}) 
+   if("{{user1.username}}" != "") 
    {
     document.getElementById("user").innerHTML = "{{user1.username}}"   
    }
