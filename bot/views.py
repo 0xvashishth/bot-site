@@ -61,5 +61,8 @@ def registeruser(request):
         return render(request,'signup.html')
 
 def loginuser(request):
-
-    return render(request, 'index.html')
+     if(request.method == "POST"):
+        username = request.POST["username"]
+        username = request.POST["password"]
+        
+        return render(request, 'index.html')
