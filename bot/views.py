@@ -75,3 +75,7 @@ def loginuser(request):
             return redirect("register")    
     else:
         return redirect("register")    
+    
+
+def userprofile(request):
+    return render(request, "userprofile.html")    
