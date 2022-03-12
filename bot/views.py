@@ -107,3 +107,21 @@ def logoutuser(request):
     logout(request)
     return redirect("/")
 
+def usersedit(request):
+    if(request.method == "GET"):
+        username = request.GET.get("editusername")
+        editfname = request.GET.get("editfname")
+        editlname = request.GET.get("editlname")
+        editaddress = request.GET.get("editaddress")
+        editphone = request.GET.get("editphone")
+
+        if(username and editaddress and editfname and editphone and editlname):
+            obj1 = user.objects.get(username=username)
+            obj1.first_name = editfname
+            obj1.last_name = editlname
+            obj1.Address = editaddress
+            obj1.phone = editphone
+            obj1.save()
+            return HttpResponse('fine')
+        else:
+            return HttpResponse('All Fields Are Required')

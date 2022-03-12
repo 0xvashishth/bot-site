@@ -66,7 +66,7 @@
                   <div class="d-flex flex-column align-items-center text-center">
                     <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
                     <div class="mt-3">
-                      <h4>{{userdata.first_name}}</h4>
+                      <h4>{{userdata.first_name}} {{userdata.last_name}}</h4>
                       <p class="text-muted font-size-sm">{{userdata.Address}}</p>
                     </div>
                   </div>
@@ -79,6 +79,12 @@
                     <span class="text-secondary">{{userdata.email}}</span>
                   </li>
                 </ul>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                    <h5 class="mb-0"><i class="material-icons">phone</i></h5>
+                    <span class="text-secondary">{{userdata.phone}}</span>
+                  </li>
+                </ul>
               </div>
             </div>
             <div class="col-md-8">
@@ -89,7 +95,7 @@
                       <h6 class="mb-0">Full Name</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      {{userdata.first_name}}
+                      {{userdata.first_name}} {{userdata.last_name}}
                     </div>
                   </div>
                   <hr>
@@ -131,7 +137,7 @@
                   <hr>
                   <div class="row">
                     <div class="col-sm-12">
-                      <a class="btn btn-info " target="__blank" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Edit</a>
+                      <a class="btn btn-info " target="__blank" data-bs-toggle="modal" data-bs-target="#editModal">Edit</a>
                     </div>
                   </div>
                 </div>
@@ -163,6 +169,78 @@
 
         </div>
     </div>
+
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit Your Details</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            {% comment %} <form> {% endcomment %}
+              {% csrf_token %}
+              <div class="mb-3">
+                <label for="edit-fname" class="col-form-label">Edit First Name:</label>
+                <input type="text" name="efname" class="form-control" id="edit-fname" value="{{userdata.first_name}}" required>
+              </div>
+              <div class="mb-3">
+                <label for="edit-lname" class="col-form-label">Edit Last Name:</label>
+                <input type="text" name="elname" class="form-control" value="{{userdata.last_name}}" id="edit-lname" required>
+              </div>
+              <div class="mb-3">
+                <label for="edit-phone" class="col-form-label">Edit Phone Number:</label>
+                <input type="text" name="ephone" class="form-control" value="{{userdata.phone}}" id="edit-phone" required>
+              </div>
+              <div class="mb-3">
+                <label for="edit-address" class="col-form-label">Edit Address:</label>
+                <input type="text" name="eaddress" class="form-control" value="{{userdata.Address}}" id="edit-address" required>
+              </div>
+          </div>
+          <div id="editdata"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <input type="submit" onclick="onedit()" class="btn btn-primary">
+          </div>
+          
+          {% comment %} </form> {% endcomment %}
+        </div>
+      </div>
+    </div>
+    <script>
+
+      editfname = document.querySelector("#edit-fname");
+      editlname = document.querySelector("#edit-lname");
+      editphone = document.querySelector("#edit-phone");
+      editaddress = document.querySelector("#edit-address");
+      username = "{{userdata.Address}}";
+      
+      function onedit(){
+        $.ajax({
+          url: '/useredit/',
+          type: "get",
+          data: {
+            editfname: editfname.value,
+            editlname: editlname.value,
+            editphone: editphone.value,
+            editaddress: editaddress.value,
+            editusername: username,
+          },
+          success: function(html){
+            var ajdisplay = document.getElementById('editdata');
+            ajdisplay.innerHTML = html;
+            if(ajdisplay.innerHTML==="fine"){
+              window.location.reload();
+            }
+          },
+          error: function(html){
+            alert("failed to connect!!");
+          }
+        });
+      }
+    
+    </script>  
+
     <script>
       if("{{userdata.username}}" != "") 
       {
@@ -183,4 +261,5 @@
        document.getElementById("logout").innerHTML="Logout";
       }
     </script>
+
 {%endblock%}    
