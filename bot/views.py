@@ -1,5 +1,6 @@
 import email
 from email.headerregistry import Address
+from functools import reduce
 from django.shortcuts import render,redirect
 # from django.contrib.auth.models import User,auth
 from django.contrib.auth import logout,authenticate
@@ -82,8 +83,6 @@ def loginuser(request):
     if(request.method == "GET"):
         username = request.GET.get("username")
         password = request.GET.get("password")
-        
-        
         if(user.objects.filter(username=username).exists()):
             if(user.objects.filter(password=password).exists()):
                 
@@ -116,19 +115,46 @@ def logoutuser(request):
 
 def usersedit(request):
     if(request.method == "GET"):
-        username = request.GET.get("editusername")
+        username = request.session.get('username')
         editfname = request.GET.get("editfname")
         editlname = request.GET.get("editlname")
         editaddress = request.GET.get("editaddress")
         editphone = request.GET.get("editphone")
 
         if(username and editaddress and editfname and editphone and editlname):
-            obj1 = user.objects.get(username=username)
-            obj1.first_name = editfname
-            obj1.last_name = editlname
-            obj1.Address = editaddress
-            obj1.phone = editphone
-            obj1.save()
-            return HttpResponse('fine')
+            if(user.objects.filter(username=username).exists()):
+                obj1 = user.objects.get(username=username)
+                obj1.first_name = editfname
+                obj1.last_name = editlname
+                obj1.Address = editaddress
+                obj1.phone = editphone
+                obj1.save()
+                return HttpResponse('fine')
+            else:
+                return HttpResponse('Something Went Wrong !!')
         else:
             return HttpResponse('All Fields Are Required')
+
+def forgotpassuser(request):
+    if(request.method == "POST" ):
+        usernameforgot = request.POST.get("usernameforgot")
+        if(usernameforgot):
+            if(user.objects.filter(username=usernameforgot).exists()):
+                obj2 = user.objects.get(username=usernameforgot)
+                if(obj2):
+                    email = obj2.email
+                    subject = 'Welcome To PyGithub-Bots'
+                    message = f'Hi {obj2.first_name} {obj2.last_name}\n\nYour Password Is This : {obj2.password}\n\nThanks & Regards\nPyGithub-Bot Team'
+                    email_from = settings.EMAIL_HOST_USER
+                    recipient_list = [email, ]
+                    send_mail( subject, message, email_from, recipient_list )
+                    messages.info(request, "Email Sent ! Kindly Check Your Email For Password")
+                    return redirect("forgotpassuser")
+            else:
+                messages.info(request, "Username Doesn't Exist")
+                return redirect("forgotpassuser")
+        else:
+            messages.info(request, "Username Is Empty")
+            return redirect("forgotpassuser")
+    else:
+        return render(request,'forgotuser.html')
