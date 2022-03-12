@@ -2,6 +2,7 @@ import email
 from email.headerregistry import Address
 from django.shortcuts import render,redirect
 # from django.contrib.auth.models import User,auth
+from django.contrib.auth import logout,authenticate
 from .models import user
 from django.contrib import messages
 from django import forms
@@ -15,10 +16,19 @@ import datetime
 
 def home(request):
     # return HttpResponse("<h1>Hello World</h1>");
-    return render(request,'index.html')
+    username = request.session.get('username')
+    if(username):
+        context={}
+        context["user1"] = user.objects.get(username = username)
+        print(context["user1"].username)
+        return render(request,'index.html',context)
+    else:
+        return render(request,'index.html')
 
 def register(request):
-
+    username = request.session.get('username')
+    if(username):
+        return redirect("/")
     return render(request, 'signup.html')
 
 def registeruser(request):
@@ -61,26 +71,38 @@ def registeruser(request):
         return render(request,'signup.html')
 
 def loginuser(request):
-    if(request.method == "POST"):
-        username = request.POST["username"]
-        password = request.POST["password"]
+    if(request.method == "GET"):
+        username = request.GET.get("username")
+        password = request.GET.get("password")
         
         
         if(user.objects.filter(username=username).exists()):
             if(user.objects.filter(password=password).exists()):
+                
                 context = {}
                 context["user1"] = user.objects.get(username = username)
-                return render(request, 'index.html', context)
+                request.session['username'] = context['user1'].username
+                # return redirect('/redirecttoindex')
+                return HttpResponse('fine')
+                # return render(request, 'index.html', context)
             else:
-                return redirect("register")
+                return HttpResponse('Password Is Incorrect')
         else:
-            return redirect("register")    
+            return HttpResponse('Username Not Found')
     else:
-        return redirect("register")    
+        return HttpResponse('Not On Right Track')    
     
 
 def userprofile(request, username):
     data = {}
-    data["userdata"] = user.objects.get(username = username)
-    
-    return render(request, "userprofile.html", data)    
+    username1 = request.session.get('username')
+    if(username and username1):
+        data["userdata"] = user.objects.get(username = username)
+        return render(request, "userprofile.html", data)
+    else:
+        return redirect("/")
+
+def logoutuser(request):
+    logout(request)
+    return redirect("/")
+
