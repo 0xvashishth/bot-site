@@ -60,7 +60,8 @@ def registeruser(request):
                 # else:
                 user1 = user(first_name=first_name,last_name=last_name,email=email,username=username,password=password1,phone=phone, Address=address, reason=reason)
                 user1.save()
-                print("User Registered")
+                request.session['username'] = username
+                print("User Registered ", username)
         else:
             messages.info(request,"Both Password is not matching")
             return redirect('register')
