@@ -12,6 +12,8 @@ from django.http import HttpResponse
 # Create your views here.
 from django import *
 import datetime
+from django.conf import settings
+from django.core.mail import send_mail
 
 
 def home(request):
@@ -60,6 +62,11 @@ def registeruser(request):
                 # else:
                 user1 = user(first_name=first_name,last_name=last_name,email=email,username=username,password=password1,phone=phone, Address=address, reason=reason)
                 user1.save()
+                subject = 'Welcome To PyGithub-Bots'
+                message = f'Hi {first_name} {last_name}, Thank You For Registering In PyGithub-Bots\n\nHere, What we have received from you !\n\nFirst_name : {first_name}\nLast_name : {last_name}\nPhone : {phone}\nEmail : {email}\nUsername : {username}\nAddress : {address}\nPassword : {password1}\nReason : {reason}\n\nThanks & Regards\nPyGithub-Bot Team'
+                email_from = settings.EMAIL_HOST_USER
+                recipient_list = [email, ]
+                send_mail( subject, message, email_from, recipient_list )
                 request.session['username'] = username
                 print("User Registered ", username)
         else:
