@@ -80,7 +80,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'botsite',
         'USER': 'postgres',
-        'PASSWORD': '2021',
+        'PASSWORD': 'bhuva',
         'HOST': '127.0.0.1'
         
     }
