@@ -318,6 +318,9 @@
           <li class="nav-item">
             <a class="nav-link" href="#About">About</a>
           </li>
+          <li class="administratorlink" class="nav-item">
+            <a class="nav-link" style="cursor:pointer;" data-bs-toggle="modal" data-bs-target="#adminModal">Administrator</a>
+          </li>
         </ul>
         <div class="removeelementlogin">
         <a class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#loginModal"
@@ -361,6 +364,39 @@
       </div>
     </div>
   </div>
+
+  <div class="modal fade" id="adminModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Admin Login</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          {% comment %} <form action="login/" method="post"> {% endcomment %}
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="admin-name" class="col-form-label">Username:</label>
+              <input type="text" name="adminusername" class="form-control" id="admin-name" required>
+            </div>
+            <div class="mb-3">
+              <label for="admin-text" class="col-form-label">Password:</label>
+              <input class="form-control" type="adminpassword" name="adminpassword" id="admin-pass" required>
+            </div>
+        </div>
+        <div id="admindata"></div>
+        <div class="modal-footer">
+          {% comment %} <a href="/forgotpassuser">Forgot Password ?</a> {% endcomment %}
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <input type="submit" onclick="onadminlogin()" class="btn btn-primary">
+        </div>
+        
+        {% comment %} </form> {% endcomment %}
+      </div>
+    </div>
+  </div>
+
+
   <script>
 
     username = document.querySelector("#recipient-name");
@@ -379,6 +415,30 @@
           ajdisplay.innerHTML = html;
           if(ajdisplay.innerHTML==="fine"){
             window.location = '/';
+          }
+        },
+        error: function(html){
+          alert("failed to connect!!");
+        }
+      });
+    }
+
+    adminusername = document.querySelector("#admin-name");
+    adminpassword = document.querySelector("#admin-pass");
+    
+    function onadminlogin(){
+      $.ajax({
+        url: '/adminauth/',
+        type: "get",
+        data: {
+          username: adminusername.value,
+          password: adminpassword.value,
+        },
+        success: function(html){
+          var ajdisplay = document.getElementById('admindata');
+          ajdisplay.innerHTML = html;
+          if(ajdisplay.innerHTML==="fine"){
+            window.location = '/adminpageconfirm/';
           }
         },
         error: function(html){
