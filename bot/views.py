@@ -105,6 +105,7 @@ def userprofile(request, username):
     username1 = request.session.get('username')
     if(username and username1):
         data["userdata"] = user.objects.get(username = username)
+        data["modul"] = data["userdata"].id % 13
         return render(request, "userprofile.html", data)
     else:
         return redirect("/")
