@@ -9,33 +9,60 @@
         <h1>A Github Bot App</h1>
         <h2>For automating work flow</h2>
         <p>Check the github Repository.</p>
-        <button class="main__btn"><a href="https://github.com/vasu-1/GithubBotApp">Repository</a></button>
+        <button class="main__btn"><a href="#" id="botlink">Bot-Link</a></button>
       </div>
       <div class="main__img--container">
-        <img id="main__img" src="https://user-images.githubusercontent.com/76911582/154839659-13d52d55-23f4-4f38-8e43-c9332bb35df7.jpg" />
+        <img id="main__img" class="d-flex " src="https://user-images.githubusercontent.com/76911582/154839659-13d52d55-23f4-4f38-8e43-c9332bb35df7.jpg" />
+        <br>
       </div>
+      
     </div>
+    <br><br>
   </div>
 
   <div class="main">
         <center>
-            <h2 id="features" class="header text-light">Features</h2>
-            <ul class="list-group">
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  Cras justo odio
-                  <span class="badge badge-primary badge-pill">14</span>
+            <div class="main__content">
+              <h3 id="features">Features</h3>
+            </div><br>
+            <ul class="text-light">
+                <li class="flex">
+                  
+                  <h4>Automatic Greeting in Issue</h4>
+                 
                 </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  Dapibus ac facilisis in
-                  <span class="badge badge-primary badge-pill">2</span>
+                <li class="">
+                  <h4>Automatic Greeting in Pulls</h4>
+                  
                 </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  Morbi leo risus
-                  <span class="badge badge-primary badge-pill">1</span>
+                <li class="">
+                  <h4>Issue Assign</h4>
+                 
+                </li>
+                <li class="">
+                  <h4>Comment Reaction</h4>
+                 
+                </li>
+                <li class="">
+                  <h4>Issue Unassign</h4>
+                 
+                </li>
+                <li class="">
+                  <h4>Show msg when pr gets merged or closed</h4>
+                 
+                </li>
+                <li class="">
+                  <h4>Show workflow status</h4>
+                 
+                </li>
+                <li class="">
+                  <h4>Show msg when issue is closed</h4>
+                 
                 </li>
             </ul>
         </center>
-  <div>
+      </div>
+      <br><br>
     
     {% comment %} <h1>{{user1.username}}</h1> {% endcomment %}
 
@@ -48,7 +75,8 @@
     document.getElementById("user").innerHTML = "{{user1.username}}"
     document.getElementById("user").href = "/userprofile/{{user1.username}}"
     document.getElementById("loginid").outerHTML = ""
-
+    document.getElementById("botlink").href = "https://github.com/apps/awesome-bot-app"
+    document.getElementById("repositorylink").href = "https://github.com/vasu-1/GithubBotApp"
     //create a new term
     const terms = document.createElement('a');
 
@@ -60,6 +88,14 @@
     var body = document.querySelector('.removeelementlogin')
     body.appendChild(terms)
     document.getElementById("logout").innerHTML="Logout";
+   }
+   else{
+    document.getElementById("botlink").addEventListener("click", clickrepo);
+    document.getElementById("repositorylink").addEventListener("click", clickrepo);
+    function clickrepo(){
+      alert("Please login/register in order to get links !!");
+    }
+    
    }
 
       

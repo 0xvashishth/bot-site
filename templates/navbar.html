@@ -105,10 +105,25 @@
       -moz-text-fill-color: transparent;
     }
 
+    .main__content h3 {
+      font-size: 2.5rem;
+      margin-top: 50px;
+      background-color: #ff8177;
+      background-image: linear-gradient(-50deg, #b721ff 20%, #21d4fd 80%);
+      background-size: 100%;
+      -webkit-background-clip: text;
+      -moz-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      -moz-text-fill-color: transparent;
+    }
+
     .main__content p {
       margin-top: 1rem;
       font-size: 2rem;
       font-weight: 700;
+    }
+    ul{
+      list-style: none;
     }
 
     .main__btn {
@@ -157,8 +172,9 @@
     }
 
     #main__img {
-      height: 80%;
-      width: 80%;
+      height: 90%;
+      width: 90%;
+      padding-left: 20px;
     }
 
     /* Mobile Responsive */
@@ -173,9 +189,17 @@
         height: 90vh;
       }
 
+      .h4{
+        font-size: 2.5rem;
+      }
+
+      .main__img--container {
+        text-align: center;
+      }
+
       .main__content {
         text-align: center;
-        margin-bottom: 4rem;
+        margin-bottom: 2rem;
       }
 
       .main__content h1 {
@@ -199,10 +223,18 @@
         margin-top: 3rem;
       }
 
+      h4{
+        font-size: 1rem;
+      }
+
       .main__content h2 {
         font-size: 2rem;
       }
 
+      .main__img--container {
+        text-align: center;
+      }
+      
       .main__content p {
         margin-top: 2rem;
         font-size: 1.5rem;
@@ -278,7 +310,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="https://github.com/vasu-1/GithubBotApp">Repository</a>
+            <a class="nav-link active" aria-current="page" href="#" id="repositorylink">Repository</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#features">Features</a>
@@ -298,6 +330,7 @@
 
   {% comment %} Login Modal {% endcomment %}
 
+
   <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -306,7 +339,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="login/" method="post">
+          {% comment %} <form action="login/" method="post"> {% endcomment %}
             {% csrf_token %}
             <div class="mb-3">
               <label for="recipient-name" class="col-form-label">Username:</label>
@@ -314,18 +347,50 @@
             </div>
             <div class="mb-3">
               <label for="password-text" class="col-form-label">Password:</label>
-              <input class="form-control" type="password" name="password" id="password-text" required>
+              <input class="form-control" type="password" name="password" id="password-pass" required>
             </div>
         </div>
+        <div id="data"></div>
         <div class="modal-footer">
+          <a href="/forgotpassuser">Forgot Password ?</a>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <input type="submit" class="btn btn-primary">
+          <input type="submit" onclick="onlogin()" class="btn btn-primary">
         </div>
-        </form>
+        
+        {% comment %} </form> {% endcomment %}
       </div>
     </div>
   </div>
+  <script>
 
+    username = document.querySelector("#recipient-name");
+    password = document.querySelector("#password-pass");
+    
+    function onlogin(){
+      $.ajax({
+        url: '/login/',
+        type: "get",
+        data: {
+          username: username.value,
+          password: password.value,
+        },
+        success: function(html){
+          var ajdisplay = document.getElementById('data');
+          ajdisplay.innerHTML = html;
+          if(ajdisplay.innerHTML==="fine"){
+            window.location = '/';
+          }
+        },
+        error: function(html){
+          alert("failed to connect!!");
+        }
+      });
+    }
+  
+  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
   {% block content %}
 
   {% endblock %}
