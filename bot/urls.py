@@ -13,4 +13,6 @@ urlpatterns = [
     path('useredit/', views.usersedit, name="useredit"),
     path('forgotpassuser/', views.forgotpassuser, name="forgotpassuser"),
     path('about', views.about, name="about"),
+    path('adminauth/', views.adminauth, name="adminauth"),
+    path('adminpageconfirm/', views.adminpageconfirm, name="adminpageconfirm"),
 ] 

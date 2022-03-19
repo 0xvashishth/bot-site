@@ -2,7 +2,7 @@ import email
 from email.headerregistry import Address
 from functools import reduce
 from django.shortcuts import render,redirect
-# from django.contrib.auth.models import User,auth
+from django.contrib.auth.models import User,auth
 from django.contrib.auth import logout,authenticate
 from .models import user
 from django.contrib import messages
@@ -105,7 +105,42 @@ def userprofile(request, username):
     username1 = request.session.get('username')
     if(username and username1):
         data["userdata"] = user.objects.get(username = username)
+        data["modul"] = data["userdata"].id % 13
         return render(request, "userprofile.html", data)
+    else:
+        return redirect("/")
+
+
+def adminauth(request):
+    if(request.method == "GET"):
+        username = request.GET.get("username")
+        password = request.GET.get("password")
+        if(User.objects.filter(username=username).exists()):
+            if(User.objects.filter(password=password).exists()):
+                request.session['adminusername'] = username
+                return HttpResponse('fine')
+            else:
+                return HttpResponse('Password Is Incorrect')
+        # print(users.value)
+        # return render(request,"admin.html",context)
+        else:
+            return HttpResponse('Username Doesn''t Exist')
+    else:
+        return HttpResponse('Not On Right Track')
+
+def adminpageconfirm(request):
+    username = request.session.get('adminusername')
+    if(username):
+        users = list(user.objects.all())
+        usercount=len(users)
+        recentusers = users[usercount-7:]
+        context={}
+        context["username"] = username
+        context["usercount"] = usercount
+        context["recentusers"] = recentusers
+        context["users"] = users
+        print("Total Users" ,context["usercount"])
+        return render(request,"admin.html",context)
     else:
         return redirect("/")
 
