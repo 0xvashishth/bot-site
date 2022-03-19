@@ -158,3 +158,6 @@ def forgotpassuser(request):
             return redirect("forgotpassuser")
     else:
         return render(request,'forgotuser.html')
+    
+def about(request):
+    return render(request, 'about.html')    

@@ -3,75 +3,74 @@
 {% load static %}
 {% comment %} {% static "images" as baseUrl %} {% endcomment %}
 
-  <div class="main">
-    <div class="main__container">
-      <div class="main__content">
-        <h1>A Github Bot App</h1>
-        <h2>For automating work flow</h2>
-        <p>Check the github Repository.</p>
-        <button class="main__btn"><a href="#" id="botlink">Bot-Link</a></button>
-      </div>
-      <div class="main__img--container">
-        <img id="main__img" class="d-flex " src="https://user-images.githubusercontent.com/76911582/154839659-13d52d55-23f4-4f38-8e43-c9332bb35df7.jpg" />
-        <br>
-      </div>
-      
+<div class="main">
+  <div class="main__container">
+    <div class="main__content">
+      <h1>A Github Bot App</h1>
+      <h2>For automating work flow</h2>
+      <p>Check the github Repository.</p>
+      <button class="main__btn"><a href="#" id="botlink">Bot-Link</a></button>
     </div>
-    <br><br>
-  </div>
+    <div class="main__img--container">
+      <img id="main__img" class="d-flex "
+        src="https://user-images.githubusercontent.com/76911582/154839659-13d52d55-23f4-4f38-8e43-c9332bb35df7.jpg" />
+      <br>
+    </div>
 
-  <div class="main">
-        <center>
-            <div class="main__content">
-              <h3 id="features">Features</h3>
-            </div><br>
-            <ul class="text-light">
-                <li class="flex">
-                  
-                  <h4>Automatic Greeting in Issue</h4>
-                 
-                </li>
-                <li class="">
-                  <h4>Automatic Greeting in Pulls</h4>
-                  
-                </li>
-                <li class="">
-                  <h4>Issue Assign</h4>
-                 
-                </li>
-                <li class="">
-                  <h4>Comment Reaction</h4>
-                 
-                </li>
-                <li class="">
-                  <h4>Issue Unassign</h4>
-                 
-                </li>
-                <li class="">
-                  <h4>Show msg when pr gets merged or closed</h4>
-                 
-                </li>
-                <li class="">
-                  <h4>Show workflow status</h4>
-                 
-                </li>
-                <li class="">
-                  <h4>Show msg when issue is closed</h4>
-                 
-                </li>
-            </ul>
-        </center>
-      </div>
-      <br><br>
-    
-    {% comment %} <h1>{{user1.username}}</h1> {% endcomment %}
+  </div>
+  <br><br>
+</div>
+
+<div class="main">
+  <center>
+    <div class="main__content">
+      <h3 id="features">Features</h3>
+    </div><br>
+    <ul class="text-light">
+      <li class="flex">
+
+        <h4>Automatic Greeting in Issue</h4>
+
+      </li>
+      <li class="">
+        <h4>Automatic Greeting in Pulls</h4>
+
+      </li>
+      <li class="">
+        <h4>Issue Assign</h4>
+
+      </li>
+      <li class="">
+        <h4>Comment Reaction</h4>
+
+      </li>
+      <li class="">
+        <h4>Issue Unassign</h4>
+
+      </li>
+      <li class="">
+        <h4>Show msg when pr gets merged or closed</h4>
+
+      </li>
+      <li class="">
+        <h4>Show workflow status</h4>
+
+      </li>
+      <li class="">
+        <h4>Show msg when issue is closed</h4>
+
+      </li>
+    </ul>
+  </center>
+</div>
+<br><br>
+
 
 
 
 <script>
 
-   if("{{user1.username}}" != "") 
-   {
+  if ("{{user1.username}}" != "") {
     document.getElementById("user").innerHTML = "{{user1.username}}"
     document.getElementById("user").href = "/userprofile/{{user1.username}}"
     document.getElementById("loginid").outerHTML = ""
@@ -81,25 +80,25 @@
     const terms = document.createElement('a');
 
     //set id
-    terms.setAttribute("id","logout");
-    terms.setAttribute("class","btn btn-outline-light");
-    terms.setAttribute("href","/logoutuser");
+    terms.setAttribute("id", "logout");
+    terms.setAttribute("class", "btn btn-outline-light");
+    terms.setAttribute("href", "/logoutuser");
     //add the new element to html
     var body = document.querySelector('.removeelementlogin')
     body.appendChild(terms)
-    document.getElementById("logout").innerHTML="Logout";
-   }
-   else{
+    document.getElementById("logout").innerHTML = "Logout";
+  }
+  else {
     document.getElementById("botlink").addEventListener("click", clickrepo);
     document.getElementById("repositorylink").addEventListener("click", clickrepo);
-    function clickrepo(){
+    function clickrepo() {
       alert("Please login/register in order to get links !!");
     }
-    
-   }
 
-      
-     
-</script>    
-    
+  }
+
+
+
+</script>
+
 {% endblock %}
