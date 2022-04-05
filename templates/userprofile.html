@@ -214,9 +214,9 @@
       editlname = document.querySelector("#edit-lname");
       editphone = document.querySelector("#edit-phone");
       editaddress = document.querySelector("#edit-address");
-      username = "{{userdata.Address}}";
       
       function onedit(){
+        console.log(editfname.value, editlname.value, username);
         $.ajax({
           url: '/useredit/',
           type: "get",
@@ -225,7 +225,7 @@
             editlname: editlname.value,
             editphone: editphone.value,
             editaddress: editaddress.value,
-            editusername: username,
+            editusername: {{userdata.username}},
           },
           success: function(html){
             var ajdisplay = document.getElementById('editdata');
