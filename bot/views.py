@@ -148,7 +148,7 @@ def logoutuser(request):
     logout(request)
     return redirect("/")
 
-def usersedit(request):
+def usersedit1(request):
     if(request.method == "GET"):
         username = request.session.get('username')
         editfname = request.GET.get("editfname")
