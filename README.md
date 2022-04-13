@@ -2,7 +2,7 @@
 <h3 align="center">Website for github app</h3>
 
 <div align="center">
-<a href="https://github.com/vasu-1/bot-site"><img src="https://sloc.xyz/github/vasu-1/bot-site" alt="total lines"/></a>
+<a href="https://github.com/vasu-1/bot-site"><img src="https://sloc.xyz/github/vasu-1/bot-site/" alt="total lines"/></a>
 <a href="https://github.com/vasu-1/bot-site"><img src="https://img.shields.io/github/stars/vasu-1/bot-site" alt="Stars"/></a>
 <a href="https://github.com/vasu-1/bot-site/network/members"><img src="https://img.shields.io/github/forks/vasu-1/bot-site" alt="Forks"/></a>
 </div>
@@ -20,5 +20,4 @@
 
 ---
 
-### You can install this app via this link in your repository
-##### [App Link](https://github.com/apps/pygithub-bot-app)
+## [Website Link](https://rocky-eyrie-99788.herokuapp.com/)
